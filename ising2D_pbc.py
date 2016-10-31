@@ -18,8 +18,8 @@
 #
 
 
-import matplotlib
-import matplotlib.pyplot as plt
+#import matplotlib
+#import matplotlib.pyplot as plt
 import numpy as np
 import math
 import sys
@@ -61,40 +61,40 @@ def parseConfigFile(cfg_file):
 				T = float(value)
 				invT = 1.0/T
 			else :
-				print "Option:", option, " is not recognized"
+				print("Option:", option, " is not recognized")
 	f.close()
 	# check that all variables are defined, assign defaults if need be and then print values
 	if log_file:
-		print "log file name:", log_file
+		print("log file name:", log_file)
 	else:
-		print "Must define log file name in config file with following line:"
-		print "logFile = [log file name]"
+		print("Must define log file name in config file with following line:")
+		print("logFile = [log file name]")
 		sys.exit(000)
 	if N:
-		print "Lattice size:", N
+		print("Lattice size:", N)
 	else:
 		# assign default value of 10
 		N = 10
-		print "Lattice size assigned default value of:", N
+		print("Lattice size assigned default value of:", N)
 	if nIter:
-		print "Number of Monte Carlo iterations:", nIter
+		print("Number of Monte Carlo iterations:", nIter)
 	else:
 		#assign default value of 100000
 		nIter = 100000
-		print "Number of Monte Carlo iterations assigned default value of:", nIter
+		print("Number of Monte Carlo iterations assigned default value of:", nIter)
 	if deltaItt:
-		print "Writing running averages every ", deltaItt, " iterations"
+		print("Writing running averages every ", deltaItt, " iterations")
 	else:
 		# assign defualt
 		deltaItt = 100
-		print "Writing running averages every ", deltaItt, " iterations"
+		print("Writing running averages every ", deltaItt, " iterations")
 	if T:
-		print "Temperature (in units of J/k):", T
+		print("Temperature (in units of J/k):", T)
 	else:
 		# assign defualt
 		T = 10.0
 		invT = 1.0/T
-		print "Temperature assigned default value (in units of J/k):", T
+		print("Temperature assigned default value (in units of J/k):", T)
 
 # compute the total energy of a lattice configuration for the Ising model with zero applied field
 def TotalEnergy(lattice):
@@ -137,20 +137,20 @@ parseConfigFile(cfg_file)
 # Initialize grid
 #lattice = RandomL(N)
 lattice = DividedStart(N)
-print "Initial lattice:"
-print lattice
+print("Initial lattice:")
+print(lattice)
 # initial lattice energy
 energy = TotalEnergy(lattice)
 N2 = N*N
 # Measurements
 Mn = sum(sum(lattice))
-print "Initial magnetism:", Mn
+print("Initial magnetism:", Mn)
 avgE = 0
 avgMn = 0
 count = 0
 # open a log file
 log = open(log_file,'w')
-print "starting Monte Carlo loop"
+print("starting Monte Carlo loop")
 # Run Monte Carlo iterations
 for itt in range (0, nIter):
 	# pick a random integer between 1 and NxN
@@ -176,7 +176,7 @@ for itt in range (0, nIter):
 		avgE += energy
 		avgMn += Mn
 		count += 1
-		print "Step ", itt, ":\n", lattice, "\n"
+		print("Step ", itt, ":\n", lattice, "\n")
 		log.write("%10d %10.5f %10.5f\n" % (itt, float(avgE)/float(count), float(avgMn)/float(count)))
 		log.flush()
 
@@ -189,10 +189,10 @@ log.write("%10d %10.5f %10.5f\n" % (itt, avgE, avgMn))
 log.flush()
 log.close()
 # print final lattice to standard out
-print "Final lattice:"
-print lattice
+print("Final lattice:")
+print(lattice)
 # plot
-data = np.loadtxt(log_file)
+#data = np.loadtxt(log_file)
 #plt.figure(1)
 #plt.subplot(211)
 #plt.title('PBC Monte Carlo Ising Model for grid %d at temperature %d' %(N, T))
